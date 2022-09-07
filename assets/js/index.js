@@ -17,11 +17,23 @@ var clearElement = function(element) {
 
 var callFetchAPI = function(city) {
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=" + city + "&appid=" + APIKey;
 
     fetch(queryURL)
-        .then
+    .then(function(weatherResponse) {
+        return weatherResponse.json();
+     })
+    .then(function(weatherResponse) {
 
+        if (weatherResponse.cod != "200") {
+            
+            displayAlertMessage("Unable to find "+ city +" in OpenWeathermap.org");
+
+            return;
+        } else {
+                createDataObject(weatherResponse.list, weatherResponse.city.coord);
+        }
+    })
 };
 
 var cityLoad = function() {
