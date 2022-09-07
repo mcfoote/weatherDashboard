@@ -7,9 +7,20 @@ var button = document.querySelector('searchButton');
 var weatherConditions = [];
 var dataStore = JSON.parse(localStorage.getItem('cities')) || [];
 
+var APIKey = 'dddc6c260b60f639e36dd929a5489bd9';
+
 var clearElement = function(element) {
 
     element.innerHTML = '';
+
+};
+
+var callFetchAPI = function(city) {
+
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+
+    fetch(queryURL)
+        .then
 
 };
 
@@ -39,15 +50,16 @@ var cityLoad = function() {
 
 var citySave = function(city){
 
-    var flag = false
+    var flag = false;
+
     if(dataStore){
 
-        for(var i = 0; i < dataStore.length; i++){
+        for(let i = 0; i < dataStore.length; i++){
 
             if(dataStore[i] === city){
 
                 flag = true;
-                
+
             }
 
         }
