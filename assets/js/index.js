@@ -78,7 +78,7 @@ var cityLoad = function() {
         ulElement.classList.add('w-100');
             
             
-        for(var i = 0; i < dataStore.length; i++){
+        for(let i = 0; i < dataStore.length; i++) {
                 
             var liElement = document.createElement('li');
             liElement.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='"+dataStore[i]+"'>" + dataStore[i] + "</button>";
@@ -97,7 +97,7 @@ var citySave = function(city) {
 
     if(dataStore) {
 
-        for(var i = 0; i < dataStore.length; i++) {
+        for(let i = 0; i < dataStore.length; i++) {
 
             if(dataStore[i] === city) {
                 flag = true;
@@ -185,6 +185,7 @@ var weatherHTML = function (city, uv) {
     imageCurrent.classList.add('bg-info');                             
     ctn1.appendChild(cityEl);
     ctn2.appendChild(imageCurrent);
+
     var ctn3  = document.createElement('div');                          
     ctn3.classList.add('col-12');
                            
@@ -199,7 +200,8 @@ var weatherHTML = function (city, uv) {
 
     var ctn6 = document.createElement('div');         
     ctn6.classList.add('row');                        
-    var ctn7 = document.createElement('div');         
+    var ctn7 = document.createElement('div');
+
     ctn7.classList.add('col-12');                     
     ctn7.innerHTML = '<h2>5-Day Forecast</h2>';
     ctn6.appendChild(ctn7);
@@ -226,9 +228,11 @@ var weatherHTML = function (city, uv) {
         var imageForecast = document.createElement('img');
         title.textContent = weatherCondition[i].dateT;
         imageForecast.setAttribute('src', weatherCondition[i].icon);
+
         var pEl1 = document.createElement('p');
         var pEl2 = document.createElement('p');
         var pEl3 = document.createElement('p');
+        
         pEl1.classList.add('small');
         pEl1.textContent = 'Temp: ' + weatherCondition[i].temp + ' °F';
         pEl2.classList.add('small');
@@ -290,7 +294,7 @@ var createDataObject = function(list, position){
 
     weatherCondition.push(obj);
 
-    for(var i=1; i<list.length; i++) {
+    for(let i=1; i<list.length; i++) {
 
         if(searchForDate9AM(list[i].dt_txt)) {
 
