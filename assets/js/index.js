@@ -161,8 +161,8 @@ $(document).on('click', '.list-group-item', function(event) {
 //Get uv index data and assign color
 var getUV = function(uv) {
 
-    var indexUV = parseFloat(uv);
     var bgColor;                            
+    var indexUV = parseFloat(uv);
     
     if(indexUV < 3){
         bgColor = 'bg-success';            
@@ -227,13 +227,13 @@ var weatherHTML = function (city, uv) {
         
         var ctn4  = document.createElement('div');  
 
-        ctn4.classList.add('card');                    
-        ctn4.classList.add('bg-dark');              
-        ctn4.classList.add('text-white');               
+        ctn4.classList.add('card');
+        ctn4.classList.add('flex-fill');
+        ctn4.classList.add('text-white');            
+        ctn4.classList.add('bg-dark');           
         ctn4.classList.add('rounded');                  
         ctn4.classList.add('mr-2');                     
-        ctn4.classList.add('flex-fill')
-
+        
         var ctn5  = document.createElement('div'); 
         ctn5.classList.add('card-body');
         var title = document.createElement('h6');
