@@ -87,7 +87,7 @@ var cityLoad = function() {
         for(let i = 0; i < dataStore.length; i++) {
                 
             var liElement = document.createElement('li');
-            liElement.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='" + dataStore[i]+"'>" + dataStore[i] + "</button>";
+            liElement.innerHTML = "<button type='button' class='list-group-item list-group-item-action bg-secondary text-light' attr='" + dataStore[i]+"'>" + dataStore[i] + "</button>";
             ulElement.appendChild(liElement);
 
         }
@@ -194,7 +194,7 @@ var weatherHTML = function (city, uv) {
 
     cityEl.textContent = city + ' (' + weatherCondition[0].dateT +')';
     imageCurrent.setAttribute('src', weatherCondition[0].icon);                           
-    imageCurrent.classList.add('bg-info');
+    imageCurrent.classList.add('bg-white');
 
     ctn1.appendChild(cityEl);
     ctn2.appendChild(imageCurrent);
@@ -228,7 +228,7 @@ var weatherHTML = function (city, uv) {
         var ctn4  = document.createElement('div');  
 
         ctn4.classList.add('card');                    
-        ctn4.classList.add('bg-primary');              
+        ctn4.classList.add('bg-dark');              
         ctn4.classList.add('text-white');               
         ctn4.classList.add('rounded');                  
         ctn4.classList.add('mr-2');                     
