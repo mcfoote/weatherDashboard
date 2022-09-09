@@ -298,9 +298,9 @@ var createDataObject = function(list, position) {
     var obj = {
 
         dateT : formatDate(list[0].dt_txt),
-        humidity : list[0].main.humidity,
-        speed: list[0].wind.speed,
         temp: list[0].main.temp,
+        speed: list[0].wind.speed,
+        humidity : list[0].main.humidity,
         icon : urlIcon + list[0].weather[0].icon + '.png',
         lat : position.lat,
         lon: position.lon
@@ -316,9 +316,9 @@ var createDataObject = function(list, position) {
             obj = {
 
                 dateT : formatDate(list[i].dt_txt),
-                humidity : list[i].main.humidity,
-                speed: list[i].wind.speed,
                 temp: list[i].main.temp,
+                speed: list[i].wind.speed,
+                humidity : list[i].main.humidity,
                 icon : urlIcon + list[i].weather[0].icon + '.png',
                 lat : position.lat,
                 lon: position.lon
