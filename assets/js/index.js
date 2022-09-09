@@ -4,18 +4,23 @@ var forecast = document.querySelector("#cityInfo");
 var historyContainer = document.querySelector("#citiesHistory");
 var button = document.querySelector("#searchButton");
 
+//arrays for weather conditions and local storage objects
 var weatherCondition = [];
 var dataStore = JSON.parse(localStorage.getItem('cities')) || [];
 
 var urlIcon = 'http://openweathermap.org/img/wn/';
+
+// Authentication Key
 var APIKey = 'dddc6c260b60f639e36dd929a5489bd9';
 
+// clear elements within container
 var clearElement = function(element) {
 
     element.innerHTML = '';
 
 };
 
+// Function to grab weather data from open weather API
 var callFetchAPI = function(city) {
 
     var url = 'http://api.openweathermap.org/data/2.5/forecast?units=imperial&q='+city + "&appid=" + APIKey;
@@ -67,6 +72,7 @@ var callFetchAPI = function(city) {
         });
 };
 
+//Load cities from local storage
 var cityLoad = function() {
 
     clearElement(historyContainer);
@@ -81,7 +87,7 @@ var cityLoad = function() {
         for(let i = 0; i < dataStore.length; i++) {
                 
             var liElement = document.createElement('li');
-            liElement.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='"+dataStore[i]+"'>" + dataStore[i] + "</button>";
+            liElement.innerHTML = "<button type='button' class='list-group-item list-group-item-action' attr='" + dataStore[i]+"'>" + dataStore[i] + "</button>";
             ulElement.appendChild(liElement);
 
         }
@@ -91,6 +97,7 @@ var cityLoad = function() {
     }
 };
 
+//Save cities to local storage
 var citySave = function(city) {
 
     var flag = false;
@@ -118,7 +125,9 @@ var citySave = function(city) {
 
 };
 
-var search = function(event){
+//Search button function implementation
+var search = function(event) {
+
     event.preventDefault();
 
     var inputElement = document.querySelector('#citySearch');
@@ -139,6 +148,7 @@ var search = function(event){
 
 };
 
+//Searched City listener to bring up previously searched cities info
 $(document).on('click', '.list-group-item', function(event) {
 
     event.preventDefault();
@@ -148,7 +158,8 @@ $(document).on('click', '.list-group-item', function(event) {
 
 });
 
-var findUV = function(uv) {
+//Get uv index data and assign color
+var getUV = function(uv) {
 
     var indexUV = parseFloat(uv);
     var bgColor;                            
@@ -167,6 +178,7 @@ var findUV = function(uv) {
 
 };
 
+//Function to display weather condition info in html page
 var weatherHTML = function (city, uv) {
 
     clearElement(current);
@@ -182,7 +194,8 @@ var weatherHTML = function (city, uv) {
 
     cityEl.textContent = city + ' (' + weatherCondition[0].dateT +')';
     imageCurrent.setAttribute('src', weatherCondition[0].icon);                           
-    imageCurrent.classList.add('bg-info');                             
+    imageCurrent.classList.add('bg-info');
+
     ctn1.appendChild(cityEl);
     ctn2.appendChild(imageCurrent);
 
@@ -192,7 +205,7 @@ var weatherHTML = function (city, uv) {
     ctn3.innerHTML = '<p>Temp: ' + weatherCondition[0].temp + ' °F' + '</p>' +
                      '<p>Wind: ' + weatherCondition[0].speed + ' MPH' + '</p>' +
                      '<p>Humidity: ' + weatherCondition[0].humidity + '% </p>' +
-                     "<p>UV index: <span class='text-white "+ findUV(uv) + "'>" + uv + '</span></p>';
+                     "<p>UV index: <span class='text-white "+ getUV(uv) + "'>" + uv + '</span></p>';
 
     current.appendChild(ctn1);
     current.appendChild(ctn2);
@@ -203,14 +216,14 @@ var weatherHTML = function (city, uv) {
     var ctn7 = document.createElement('div');
 
     ctn7.classList.add('col-12');                     
-    ctn7.innerHTML = '<h2>5-Day Forecast</h2>';
+    ctn7.innerHTML = '<h2>5-Day Forecast: </h2>';
     ctn6.appendChild(ctn7);
     forecast.appendChild(ctn6);
 
     var ctn8 = document.createElement('div');         
     ctn8.classList.add('d-flex');                     
 
-    for(var i=1; i<weatherCondition.length; i++){    
+    for(var i=1; i<weatherCondition.length; i++) {    
         
         var ctn4  = document.createElement('div');  
 
@@ -254,12 +267,13 @@ var weatherHTML = function (city, uv) {
     
 };
 
-var searchForDate9AM = function (str) {
+
+var searchForDate = function (str) {
 
     var hour = str.split(' ')[1].split(':')[0];
     var flag = false;
     
-    if(hour === '09') {
+    if(hour === '12') {
         flag = true;
     }        
     
@@ -267,7 +281,8 @@ var searchForDate9AM = function (str) {
 
 };
 
-var formatDate = function(strDate){
+// prepare date format for proper output
+var formatDate = function(strDate) {
 
     var newDate = strDate.split(' ')[0].split('-');
 
@@ -275,8 +290,8 @@ var formatDate = function(strDate){
 
 };
 
-var createDataObject = function(list, position){
-
+//Create array of objects from weather conditions
+var createDataObject = function(list, position) {
     
     if(weatherCondition.length) weatherCondition = [];
 
@@ -296,7 +311,7 @@ var createDataObject = function(list, position){
 
     for(let i=1; i<list.length; i++) {
 
-        if(searchForDate9AM(list[i].dt_txt)) {
+        if(searchForDate(list[i].dt_txt)) {
 
             obj = {
 
@@ -317,6 +332,8 @@ var createDataObject = function(list, position){
 
 };
 
+//call load function
 cityLoad();
 
+//event listener for search button
 button.addEventListener('click', search);
