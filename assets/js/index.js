@@ -33,7 +33,7 @@ var callFetchAPI = function(city) {
 
         if (weatherResponse.cod != '200') {
             
-            alert('Unable to find '+ city +' in OpenWeathermap.org');
+            alert('Can not find '+ city +' in OpenWeathermap.org API');
 
             return;
         }else {
@@ -52,7 +52,7 @@ var callFetchAPI = function(city) {
         .then(function(uvResponse) {
 
           if (!uvResponse) {  
-            alert('OpenWeathermap.org could not find anything for latitude and Longitude');
+            alert('Unable to find anythig in OpenWeathermap.org for Latitude and Longitude');
 
             return;
           } else {
@@ -66,7 +66,7 @@ var callFetchAPI = function(city) {
     })
         .catch(function(error) {
             
-            alert('Unable to connect to OpenWeathermap.org');
+            alert('Failed to connect to OpenWeathermap.org');
             return;
 
         });
@@ -135,7 +135,7 @@ var search = function(event) {
 
     if(inputElement.value === '') {
 
-        alert('Weather Dashbord\n   You must enter a City');
+        alert('You need to enter a City');
         return;
 
     }else {
