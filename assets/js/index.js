@@ -23,7 +23,7 @@ var clearElement = function(element) {
 // Function to grab weather data from open weather API
 var callFetchAPI = function(city) {
 
-    var url = 'http://api.openweathermap.org/data/2.5/forecast?units=imperial&q='+city + "&appid=" + APIKey;
+    var url = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&q='+city + "&appid=" + APIKey;
 
     fetch(url)
     .then(function(weatherResponse) {
@@ -42,7 +42,7 @@ var callFetchAPI = function(city) {
 
         }
 
-        var url1 = 'http://api.openweathermap.org/data/2.5/uvi?lat='+weatherCondition[0].lat+'&lon='+weatherCondition[0].lon + "&appid=" + APIKey;
+        var url1 = 'https://api.openweathermap.org/data/2.5/uvi?lat='+weatherCondition[0].lat+'&lon='+weatherCondition[0].lon + "&appid=" + APIKey;
         
         fetch(url1)
 
